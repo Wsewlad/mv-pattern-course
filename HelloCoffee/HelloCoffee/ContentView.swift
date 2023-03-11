@@ -13,12 +13,17 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            List(model.orders) { order in
-                OrderRow(order: order)
+            if model.orders.isEmpty {
+                Text("No orders available!")
+                    .accessibilityIdentifier("noOrdersText")
+            } else {
+                List(model.orders) { order in
+                    OrderRow(order: order)
+                }
             }
-            .task {
-                await populateOrders()
-            }
+        }
+        .task {
+            await populateOrders()
         }
     }
 }
