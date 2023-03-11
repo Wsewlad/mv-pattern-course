@@ -9,11 +9,14 @@ import Foundation
 
 enum Endpoints {
     case allOrders
+    case placeOrder
     
     var path: String {
         switch self {
         case .allOrders:
             return "/test/orders"
+        case .placeOrder:
+            return "/test/new-order"
         }
     }
 }
