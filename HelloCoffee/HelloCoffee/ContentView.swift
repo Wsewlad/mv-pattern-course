@@ -34,27 +34,6 @@ private extension ContentView {
     }
 }
 
-//MARK: - OrderRow
-struct OrderRow: View {
-    let order: Order
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(order.name)
-                    .bold()
-                    .accessibilityIdentifier("orderNameText")
-                Text("\(order.coffeeName) (\(order.size.rawValue))")
-                    .opacity(0.5)
-                    .accessibilityIdentifier("coffeeNameAndSizeText")
-            }
-            Spacer()
-            Text(order.total as NSNumber, formatter: NumberFormatter.currency)
-                .accessibilityIdentifier("orderNameText")
-        }
-    }
-}
-
 //MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
