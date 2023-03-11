@@ -7,12 +7,14 @@
 
 import Foundation
 
+//MARK: - NetworkError
 enum NetworkError: Error {
     case badRequest
     case decodingError
     case badUrl
 }
 
+//MARK: - Webservice
 class Webservice {
     
     func getOrders() async throws -> [Order] {
