@@ -92,6 +92,10 @@ extension XCUIApplication {
         let screenTitle = self.staticTexts[element.elementValue]
         return screenTitle.waitForExistence(timeout: timeout) && screenTitle.isHittable
     }
+    
+    func label(of element: AccessibilityIds) -> String {
+       return self.staticTexts[element.elementValue].label
+    }
 }
 
 //MARK: - Set Launch Arguments

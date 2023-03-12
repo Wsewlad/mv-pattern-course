@@ -6,6 +6,7 @@ public enum Screens: String {
     case example
     
     case root
+    case addCoffee
 }
 
 //MARK: - Example
@@ -45,4 +46,18 @@ public enum Root: String, AccessibilityIds {
     
     case noOrdersText
     case buttonToAddNewOrder
+    
+    case orderNameText
+    case coffeeNameAndSizeText
+    case coffeePriceText
+}
+
+//MARK: - AddCoffee
+public enum AddCoffee: String, AccessibilityIds {
+    public var screenName: Screens { .addCoffee }
+    
+    case nameTextField
+    case coffeeNameTextField
+    case priceTextField
+    case buttonForPlaceOrder
 }

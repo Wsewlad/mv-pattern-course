@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AccessibilityIds
 
 struct AddCoffeeView: View {
     @State private var name: String = ""
@@ -23,20 +24,20 @@ struct AddCoffeeView: View {
         NavigationStack {
             Form {
                 TextField("Name", text: $name)
-                    .accessibilityIdentifier("name")
+                    .setAccessiblityId(screen: AddCoffee.self, .nameTextField)
                 Text(errors.name)
                     .font(.caption)
                     .visible(errors.name.isNotEmpty)
                 
                 
                 TextField("Coffee name", text: $coffeeName)
-                    .accessibilityIdentifier("coffeeName")
+                    .setAccessiblityId(screen: AddCoffee.self, .coffeeNameTextField)
                 Text(errors.coffeeName)
                     .font(.caption)
                     .visible(errors.coffeeName.isNotEmpty)
                 
                 TextField("Price", text: $price)
-                    .accessibilityIdentifier("price")
+                    .setAccessiblityId(screen: AddCoffee.self, .priceTextField)
                 Text(errors.price)
                     .font(.caption)
                     .visible(errors.price.isNotEmpty)
@@ -56,7 +57,7 @@ struct AddCoffeeView: View {
                     }
                 }
                 .centerHorizontaly()
-                .accessibilityIdentifier("placeOrderButton")
+                .setAccessiblityId(screen: AddCoffee.self, .buttonForPlaceOrder)
             }
             .navigationTitle("Add Coffee")
         }

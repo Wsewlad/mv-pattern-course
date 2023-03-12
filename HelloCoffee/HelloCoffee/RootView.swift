@@ -11,7 +11,6 @@ import AccessibilityIds
 struct RootView: View {
     
     @EnvironmentObject private var model: CoffeeModel
-    
     @State private var isNewOrderViewPresented: Bool = false
     
     var body: some View {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AccessibilityIds
 
 struct OrderRow: View {
     let order: Order
@@ -15,14 +16,15 @@ struct OrderRow: View {
             VStack(alignment: .leading) {
                 Text(order.name)
                     .bold()
-                    .accessibilityIdentifier("orderNameText")
+                    .setAccessiblityId(screen: Root.self, .orderNameText)
+                    
                 Text("\(order.coffeeName) (\(order.size.rawValue))")
                     .opacity(0.5)
-                    .accessibilityIdentifier("coffeeNameAndSizeText")
+                    .setAccessiblityId(screen: Root.self, .coffeeNameAndSizeText)
             }
             Spacer()
             Text(order.total as NSNumber, formatter: NumberFormatter.currency)
-                .accessibilityIdentifier("coffeePriceText")
+                .setAccessiblityId(screen: Root.self, .coffeePriceText)
         }
     }
 }
