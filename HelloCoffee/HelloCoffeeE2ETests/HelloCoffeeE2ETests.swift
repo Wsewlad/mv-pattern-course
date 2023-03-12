@@ -6,18 +6,20 @@
 //
 
 import XCTest
+import AccessibilityIds
 
-final class when_app_is_launched_with_no_orders: XCTestCase {
+final class RootUITests: XCTestCase {
+    let app = XCUIApplication()
 
-    func test_should_make_sure_no_orders_message_is_displayed() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+    override func setUpWithError() throws {
         continueAfterFailure = false
-        app.launchEnvironment = ["ENV": "TEST"]
+        clearOrders()
+        app.setLaunchArguments()
         app.launch()
-
-        XCTAssertEqual("No orders available!", app.staticTexts["noOrdersText"].label)
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func test_noOrdersPlaceholderDisplayed() throws {
+        XCTAssertTrue(app.isWithTimeoutHittable(Root.noOrdersText, timeout: 0.2))
     }
 }
 
@@ -59,9 +61,13 @@ final class when_adding_a_new_coffee_order: XCTestCase {
     
     // called after each test
     override func tearDown() {
-        Task {
-            guard let url = URL(string: "/test/clear-orders", relativeTo: URL(string: "https://island-bramble.glitch.me")!) else { return }
-            let (_, _) = try! await URLSession.shared.data(from: url)
-        }
+        clearOrders()
+    }
+}
+
+func clearOrders() {
+    Task {
+        guard let url = URL(string: "/test/clear-orders", relativeTo: URL(string: "https://island-bramble.glitch.me")!) else { return }
+        let (_, _) = try! await URLSession.shared.data(from: url)
     }
 }

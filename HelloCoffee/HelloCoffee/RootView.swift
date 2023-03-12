@@ -1,13 +1,14 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  HelloCoffee
 //
 //  Created by Mohammad Azam on 9/2/22.
 //
 
 import SwiftUI
+import AccessibilityIds
 
-struct ContentView: View {
+struct RootView: View {
     
     @EnvironmentObject private var model: CoffeeModel
     
@@ -18,7 +19,7 @@ struct ContentView: View {
             VStack {
                 if model.orders.isEmpty {
                     Text("No orders available!")
-                        .accessibilityIdentifier("noOrdersText")
+                        .setAccessiblityId(screen: Root.self, .noOrdersText)
                 } else {
                     List(model.orders) { order in
                         OrderRow(order: order)
@@ -33,7 +34,7 @@ struct ContentView: View {
                     Button("Add new order") {
                         isNewOrderViewPresented = true
                     }
-                    .accessibilityIdentifier("addNewOrderButton")
+                    .setAccessiblityId(screen: Root.self, .buttonToAddNewOrder)
                 }
             }
             .sheet(isPresented: $isNewOrderViewPresented) {
@@ -44,7 +45,7 @@ struct ContentView: View {
 }
 
 //MARK: - Functions
-private extension ContentView {
+private extension RootView {
     func populateOrders() async {
         do {
             try await model.populateOrders()
@@ -55,10 +56,10 @@ private extension ContentView {
 }
 
 //MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         var config = Configuration()
-        ContentView()
+        RootView()
             .environmentObject(CoffeeModel(webservice: Webservice(baseURL: config.environment.baseURL)))
     }
 }
