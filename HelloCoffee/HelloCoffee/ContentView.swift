@@ -11,19 +11,34 @@ struct ContentView: View {
     
     @EnvironmentObject private var model: CoffeeModel
     
+    @State private var isNewOrderViewPresented: Bool = false
+    
     var body: some View {
-        VStack {
-            if model.orders.isEmpty {
-                Text("No orders available!")
-                    .accessibilityIdentifier("noOrdersText")
-            } else {
-                List(model.orders) { order in
-                    OrderRow(order: order)
+        NavigationStack {
+            VStack {
+                if model.orders.isEmpty {
+                    Text("No orders available!")
+                        .accessibilityIdentifier("noOrdersText")
+                } else {
+                    List(model.orders) { order in
+                        OrderRow(order: order)
+                    }
                 }
             }
-        }
-        .task {
-            await populateOrders()
+            .task {
+                await populateOrders()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add new order") {
+                        isNewOrderViewPresented = true
+                    }
+                    .accessibilityIdentifier("addNewOrderButton")
+                }
+            }
+            .sheet(isPresented: $isNewOrderViewPresented) {
+                AddCoffeeView()
+            }
         }
     }
 }

@@ -15,41 +15,68 @@ struct AddCoffeeView: View {
     
     @State private var errors = Errors()
     
+    @EnvironmentObject private var model: CoffeeModel
+    
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        Form {
-            TextField("Name", text: $name)
-                .accessibilityIdentifier("name")
-            Text(errors.name)
-                .font(.caption)
-                .visible(errors.name.isNotEmpty)
+        NavigationStack {
+            Form {
+                TextField("Name", text: $name)
+                    .accessibilityIdentifier("name")
+                Text(errors.name)
+                    .font(.caption)
+                    .visible(errors.name.isNotEmpty)
                 
-            
-            TextField("Coffee name", text: $coffeeName)
-                .accessibilityIdentifier("coffeeName")
-            Text(errors.coffeeName)
-                .font(.caption)
-                .visible(errors.coffeeName.isNotEmpty)
-            
-            TextField("Price", text: $price)
-                .accessibilityIdentifier("price")
-            Text(errors.price)
-                .font(.caption)
-                .visible(errors.price.isNotEmpty)
-            
-            Picker("Select size", selection: $coffeeSize) {
-                ForEach(CoffeeSize.allCases, id: \.rawValue) { size in
-                    Text(size.rawValue).tag(size)
+                
+                TextField("Coffee name", text: $coffeeName)
+                    .accessibilityIdentifier("coffeeName")
+                Text(errors.coffeeName)
+                    .font(.caption)
+                    .visible(errors.coffeeName.isNotEmpty)
+                
+                TextField("Price", text: $price)
+                    .accessibilityIdentifier("price")
+                Text(errors.price)
+                    .font(.caption)
+                    .visible(errors.price.isNotEmpty)
+                
+                Picker("Select size", selection: $coffeeSize) {
+                    ForEach(CoffeeSize.allCases, id: \.rawValue) { size in
+                        Text(size.rawValue).tag(size)
+                    }
                 }
-            }
-            .pickerStyle(.segmented)
-            
-            Button("Place Order") {
-                if isValid {
-                    
+                .pickerStyle(.segmented)
+                
+                Button("Place Order") {
+                    if isValid {
+                        Task {
+                            await placeOrder()
+                        }
+                    }
                 }
+                .centerHorizontaly()
+                .accessibilityIdentifier("placeOrderButton")
             }
-            .centerHorizontaly()
-            .accessibilityIdentifier("placeOrderButton")
+            .navigationTitle("Add Coffee")
+        }
+    }
+}
+
+//MARK: - Functions
+private extension AddCoffeeView {
+    func placeOrder() async {
+        let order = Order(
+            name: name,
+            coffeeName: coffeeName,
+            total: Double(price) ?? 0,
+            size: coffeeSize
+        )
+        do {
+            try await model.placeOrder(order)
+            dismiss()
+        } catch {
+            print(error)
         }
     }
 }
