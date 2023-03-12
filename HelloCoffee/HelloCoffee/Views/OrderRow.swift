@@ -22,7 +22,7 @@ struct OrderRow: View {
             }
             Spacer()
             Text(order.total as NSNumber, formatter: NumberFormatter.currency)
-                .accessibilityIdentifier("orderNameText")
+                .accessibilityIdentifier("coffeePriceText")
         }
     }
 }
