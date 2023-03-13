@@ -20,8 +20,10 @@ struct RootView: View {
                     Text("No orders available!")
                         .setAccessiblityId(screen: Root.self, .noOrdersText)
                 } else {
-                    List(model.orders) { order in
-                        OrderRow(order: order)
+                    List {
+                        ForEach(model.orders) { order in
+                            OrderRow(order: order)
+                        }.onDelete(perform: deleteOrder)
                     }
                 }
             }
@@ -50,6 +52,22 @@ private extension RootView {
             try await model.populateOrders()
         } catch {
             print(error)
+        }
+    }
+    
+    func deleteOrder(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let order = model.orders[index]
+            guard let orderId = order.id else {
+                return
+            }
+            Task {
+                do {
+                    try await model.deleteOrder(orderId)
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
 }
