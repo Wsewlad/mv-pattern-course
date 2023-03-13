@@ -29,7 +29,6 @@ struct AddCoffeeView: View {
                     .font(.caption)
                     .visible(errors.name.isNotEmpty)
                 
-                
                 TextField("Coffee name", text: $coffeeName)
                     .setAccessiblityId(screen: AddCoffee.self, .coffeeNameTextField)
                 Text(errors.coffeeName)

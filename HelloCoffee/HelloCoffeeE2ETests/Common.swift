@@ -53,9 +53,9 @@ extension XCUIApplication {
         button.tap()
     }
     
-    func tryEnterTextIntoTextField(_ element: AccessibilityIds, text: String) {
+    func tryEnterTextIntoTextField(_ element: AccessibilityIds, text: String, timeout: TimeInterval = 1.5) {
         let textField = self.textFields[element.elementValue]
-        XCTAssertTrue(textField.exists)
+        XCTAssertTrue(textField.waitForExistence(timeout: timeout))
         textField.clearAndEnterText(text: text)
     }
     
