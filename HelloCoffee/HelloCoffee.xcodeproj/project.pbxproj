@@ -15,6 +15,7 @@
 		82776E9129BD317B000EFB2E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82776E9029BD317B000EFB2E /* View.swift */; };
 		82776E9329BD35B8000EFB2E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82776E9229BD35B8000EFB2E /* String.swift */; };
 		829AAA9A29BCB6F900950B44 /* CoffeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AAA9929BCB6F900950B44 /* CoffeeModel.swift */; };
+		829FCFE829BFC84200C216D4 /* DeleteOrderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */; };
 		82AAE1AA29BE670F00A87FC4 /* AddCoffeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */; };
 		82F4374B29BE08190020E927 /* AccessibilityIds in Frameworks */ = {isa = PBXBuildFile; productRef = 82F4374A29BE08190020E927 /* AccessibilityIds */; };
 		82F4374D29BE13850020E927 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F4374C29BE13840020E927 /* Common.swift */; };
@@ -48,6 +49,7 @@
 		82776E9229BD35B8000EFB2E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		82776E9529BDFA7D000EFB2E /* AccessibilityIds */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AccessibilityIds; sourceTree = "<group>"; };
 		829AAA9929BCB6F900950B44 /* CoffeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeModel.swift; sourceTree = "<group>"; };
+		829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteOrderUITests.swift; sourceTree = "<group>"; };
 		82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoffeeUITests.swift; sourceTree = "<group>"; };
 		82F4374C29BE13840020E927 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		8D73ECAB28C2513C00D8D3DF /* HelloCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 				82776E8529BD27E0000EFB2E /* RootUITests.swift */,
 				82F4374C29BE13840020E927 /* Common.swift */,
 				82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */,
+				829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */,
 			);
 			path = HelloCoffeeE2ETests;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				82F4374D29BE13850020E927 /* Common.swift in Sources */,
 				82776E8629BD27E0000EFB2E /* RootUITests.swift in Sources */,
 				82AAE1AA29BE670F00A87FC4 /* AddCoffeeUITests.swift in Sources */,
+				829FCFE829BFC84200C216D4 /* DeleteOrderUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
