@@ -22,10 +22,16 @@ struct RootView: View {
                 } else {
                     List {
                         ForEach(model.orders) { order in
-                            OrderRow(order: order)
-                        }.onDelete(perform: deleteOrder)
+                            NavigationLink(value: order.id) {
+                                OrderRow(order: order)
+                            }
+                        }
+                        .onDelete(perform: deleteOrder)
                     }
                 }
+            }
+            .navigationDestination(for: Int.self) { orderId in
+                OrderDetailView(orderId: orderId)
             }
             .task {
                 await populateOrders()

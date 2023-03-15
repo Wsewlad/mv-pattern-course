@@ -9,6 +9,9 @@ import SwiftUI
 import AccessibilityIds
 
 struct AddCoffeeView: View {
+    
+    var order: Order? = nil
+    
     @State private var name: String = ""
     @State private var coffeeName: String = ""
     @State private var price: String = ""
@@ -48,35 +51,61 @@ struct AddCoffeeView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                Button("Place Order") {
+                Button(actionTitle) {
                     if isValid {
-                        Task {
-                            await placeOrder()
-                        }
+                        Task { await createOrUpdateOrder() }
                     }
                 }
                 .centerHorizontaly()
                 .setAccessiblityId(screen: AddCoffee.self, .buttonForPlaceOrder)
             }
-            .navigationTitle("Add Coffee")
+            .navigationTitle(title)
+            .onAppear {
+                populateExistingOrder()
+            }
         }
+    }
+}
+
+//MARK: - Computed Properties
+private extension AddCoffeeView {
+    var title: String {
+        order != nil ? "Update Coffee" : "Add Coffee"
+    }
+    
+    var actionTitle: String {
+        order != nil ? "Update Order" : "Place Order"
     }
 }
 
 //MARK: - Functions
 private extension AddCoffeeView {
-    func placeOrder() async {
+    func createOrUpdateOrder() async {
         let order = Order(
+            id: self.order?.id,
             name: name,
             coffeeName: coffeeName,
             total: Double(price) ?? 0,
             size: coffeeSize
         )
         do {
-            try await model.placeOrder(order)
+            if self.order != nil {
+                try await model.updateOrder(order)
+            } else {
+                try await model.placeOrder(order)
+            }
             dismiss()
         } catch {
             print(error)
+        }
+    }
+    
+    func populateExistingOrder() {
+        if let order {
+            name = order.name
+            coffeeName = order.coffeeName
+            price = String(order.total)
+            coffeeSize = order.size
         }
     }
 }
