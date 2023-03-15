@@ -16,6 +16,7 @@
 		82776E9329BD35B8000EFB2E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82776E9229BD35B8000EFB2E /* String.swift */; };
 		829AAA9A29BCB6F900950B44 /* CoffeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AAA9929BCB6F900950B44 /* CoffeeModel.swift */; };
 		829FCFE829BFC84200C216D4 /* DeleteOrderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */; };
+		82A1558829C2534F00D449A9 /* UpdateOrderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1558729C2534F00D449A9 /* UpdateOrderUITests.swift */; };
 		82A7C98429C061490071644E /* OrderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7C98329C061490071644E /* OrderDetailView.swift */; };
 		82AAE1AA29BE670F00A87FC4 /* AddCoffeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */; };
 		82F4374B29BE08190020E927 /* AccessibilityIds in Frameworks */ = {isa = PBXBuildFile; productRef = 82F4374A29BE08190020E927 /* AccessibilityIds */; };
@@ -51,6 +52,7 @@
 		82776E9529BDFA7D000EFB2E /* AccessibilityIds */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AccessibilityIds; sourceTree = "<group>"; };
 		829AAA9929BCB6F900950B44 /* CoffeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeModel.swift; sourceTree = "<group>"; };
 		829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteOrderUITests.swift; sourceTree = "<group>"; };
+		82A1558729C2534F00D449A9 /* UpdateOrderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrderUITests.swift; sourceTree = "<group>"; };
 		82A7C98329C061490071644E /* OrderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailView.swift; sourceTree = "<group>"; };
 		82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoffeeUITests.swift; sourceTree = "<group>"; };
 		82F4374C29BE13840020E927 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				82F4374C29BE13840020E927 /* Common.swift */,
 				82AAE1A929BE670F00A87FC4 /* AddCoffeeUITests.swift */,
 				829FCFE729BFC84200C216D4 /* DeleteOrderUITests.swift */,
+				82A1558729C2534F00D449A9 /* UpdateOrderUITests.swift */,
 			);
 			path = HelloCoffeeE2ETests;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			files = (
 				82F4374D29BE13850020E927 /* Common.swift in Sources */,
 				82776E8629BD27E0000EFB2E /* RootUITests.swift in Sources */,
+				82A1558829C2534F00D449A9 /* UpdateOrderUITests.swift in Sources */,
 				82AAE1AA29BE670F00A87FC4 /* AddCoffeeUITests.swift in Sources */,
 				829FCFE829BFC84200C216D4 /* DeleteOrderUITests.swift in Sources */,
 			);

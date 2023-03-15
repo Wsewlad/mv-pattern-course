@@ -42,15 +42,26 @@ public enum Example: AccessibilityIds {
 }
    
 //MARK: - Root
-public enum Root: String, AccessibilityIds {
+public enum Root: AccessibilityIds {
     public var screenName: Screens { .root }
     
     case noOrdersText
     case buttonToAddNewOrder
-    
     case orderNameText
     case coffeeNameAndSizeText
     case coffeePriceText
+    case buttonToOrderElement(Int)
+    
+    public var rawValue: String {
+        switch self {
+        case .noOrdersText: return "noOrdersText"
+        case .buttonToAddNewOrder: return "buttonToAddNewOrder"
+        case .orderNameText: return "orderNameText"
+        case .coffeeNameAndSizeText: return "coffeeNameAndSizeText"
+        case .coffeePriceText: return "coffeePriceText"
+        case let .buttonToOrderElement(index): return "buttonToOrderElement_\(index)"
+        }
+    }
 }
 
 //MARK: - AddCoffee

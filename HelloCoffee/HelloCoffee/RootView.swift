@@ -25,6 +25,7 @@ struct RootView: View {
                             NavigationLink(value: order.id) {
                                 OrderRow(order: order)
                             }
+                            .setAccessiblityId(screen: Root.self, .buttonToOrderElement(model.orders.firstIndex(of: order) ?? 0))
                         }
                         .onDelete(perform: deleteOrder)
                     }

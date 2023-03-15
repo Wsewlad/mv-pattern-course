@@ -32,17 +32,13 @@ final class DeleteOrderUITests: XCTestCase {
     func test_deleteOrder() throws {
         fillFiledsAndPlaceOrder()
         
-        XCTAssertEqual("John", app.label(of: Root.orderNameText))
-        XCTAssertEqual("Hot Coffee (Medium)", app.label(of: Root.coffeeNameAndSizeText))
-        XCTAssertEqual("$4.50", app.label(of: Root.coffeePriceText))
+        XCTAssertEqual("John", app.textElementById(Root.orderNameText).label)
+        XCTAssertEqual("Hot Coffee (Medium)", app.textElementById(Root.coffeeNameAndSizeText).label)
+        XCTAssertEqual("$4.50", app.textElementById(Root.coffeePriceText).label)
         
         let collectionViewQuery = XCUIApplication().collectionViews
-        let cellsQuery = collectionViewQuery.cells
-        let element = cellsQuery
-            .children(matching: .other)
-            .element(boundBy: 1)
-            .children(matching: .other)
-            .element
+        
+        let element = app.elementById(Root.buttonToOrderElement(0))
         element.swipeLeft()
         collectionViewQuery.buttons["Delete"].tap()
         

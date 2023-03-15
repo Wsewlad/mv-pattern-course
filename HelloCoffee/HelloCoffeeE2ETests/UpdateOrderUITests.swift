@@ -1,14 +1,14 @@
 //
-//  AddCoffeeUITests.swift
+//  UpdateOrderUITests.swift
 //  HelloCoffeeE2ETests
 //
-//  Created by  Vladyslav Fil on 12.03.2023.
+//  Created by  Vladyslav Fil on 15.03.2023.
 //
 
 import XCTest
 import AccessibilityIds
 
-final class AddCoffeeUITests: XCTestCase {
+final class UpdateOrderUITests: XCTestCase {
     let app = XCUIApplication()
 
     override func setUpWithError() throws {
@@ -35,6 +35,9 @@ final class AddCoffeeUITests: XCTestCase {
         XCTAssertEqual("John", app.textElementById(Root.orderNameText).label)
         XCTAssertEqual("Hot Coffee (Medium)", app.textElementById(Root.coffeeNameAndSizeText).label)
         XCTAssertEqual("$4.50", app.textElementById(Root.coffeePriceText).label)
+        
+        let element = app.elementById(Root.buttonToOrderElement(0))
+        element.swipeLeft()
     }
     
     // called after each test
@@ -42,3 +45,4 @@ final class AddCoffeeUITests: XCTestCase {
         clearOrders()
     }
 }
+

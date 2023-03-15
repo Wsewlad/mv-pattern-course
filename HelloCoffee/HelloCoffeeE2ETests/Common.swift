@@ -34,67 +34,89 @@ extension XCTestCase {
 
 //MARK: - Buttons
 extension XCUIApplication {
+    func buttonElementById(_ id: AccessibilityIds) -> XCUIElement {
+        self.buttons[id.elementValue]
+    }
     
-    func tryTapButton(_ element: AccessibilityIds) {
-        let button = self.buttons[element.elementValue]
+    func tryTapButton(_ id: AccessibilityIds) {
+        let button = buttonElementById(id)
         XCTAssertTrue(button.exists)
         button.tap()
     }
     
-    func tryTapButtonWithTimeout(_ element: AccessibilityIds, timeout: TimeInterval = 1.5) {
-        let button = self.buttons[element.elementValue]
+    func tryTapButtonWithTimeout(_ id: AccessibilityIds, timeout: TimeInterval = 1.5) {
+        let button = buttonElementById(id)
         XCTAssertTrue(button.waitForExistence(timeout: timeout))
         button.tap()
     }
-    
-    func tryTapElementWithTimeout(_ element: AccessibilityIds, timeout: TimeInterval = 1.5) {
-        let button = self.otherElements[element.elementValue]
-        XCTAssertTrue(button.waitForExistence(timeout: timeout))
-        button.tap()
+}
+
+//MARK: - Screens + staticTexts
+extension XCUIApplication {
+    func textElementByScreen(_ screen: Screens) -> XCUIElement {
+        self.staticTexts[screen.rawValue]
     }
     
-    func tryEnterTextIntoTextField(_ element: AccessibilityIds, text: String, timeout: TimeInterval = 1.5) {
-        let textField = self.textFields[element.elementValue]
+    func waitForTextElementExistence(screen: Screens, timeout: TimeInterval = 0.1) -> Bool {
+        textElementByScreen(screen).waitForExistence(timeout: timeout)
+    }
+}
+
+//MARK: - AccessibilityIds
+
+
+
+//MARK: - textFields
+extension XCUIApplication {
+    func textFieldElementById(_ id: AccessibilityIds) -> XCUIElement {
+        self.textFields[id.elementValue]
+    }
+    
+    func tryEnterTextIntoTextField(_ id: AccessibilityIds, text: String, timeout: TimeInterval = 1.5) {
+        let textField = textFieldElementById(id)
         XCTAssertTrue(textField.waitForExistence(timeout: timeout))
         textField.clearAndEnterText(text: text)
     }
+}
+
+//MARK: - secureTextFields
+extension XCUIApplication {
+    func secureTextFieldElementById(_ id: AccessibilityIds) -> XCUIElement {
+        self.textFields[id.elementValue]
+    }
     
-    func tryEnterTextIntoSecureTextField(_ element: AccessibilityIds, text: String) {
-        let secureTextField = self.secureTextFields[element.elementValue]
+    func tryEnterTextIntoSecureTextField(_ id: AccessibilityIds, text: String) {
+        let secureTextField = secureTextFieldElementById(id)
         XCTAssertTrue(secureTextField.exists)
         secureTextField.clearAndEnterText(text: text)
     }
 }
 
-//MARK: - Screens
+//MARK: - descendants
 extension XCUIApplication {
-    func isWithTimeoutPresented(screen: Screens, timeout: TimeInterval = 0.1) -> Bool {
-        let screenTitle = self.staticTexts[screen.rawValue]
-        return screenTitle.waitForExistence(timeout: timeout)
+    func elementById(_ id: AccessibilityIds) -> XCUIElement {
+        self.descendants(matching: .any)
+            .matching(
+                identifier: id.elementValue
+            ).element
     }
     
-    func isPresented(screen: Screens) -> Bool {
-        let screenTitle = self.staticTexts[screen.rawValue]
-        return screenTitle.exists
+    func tryTapElementWithTimeout(_ id: AccessibilityIds, timeout: TimeInterval = 1.5) {
+        let element = elementById(id)
+        XCTAssertTrue(element.waitForExistence(timeout: timeout))
+        element.tap()
     }
+}
     
-    func isPresented(_ element: AccessibilityIds) -> Bool {
-        let screenTitle = self.staticTexts[element.elementValue]
-        return screenTitle.exists
-    }
-    
-    func isHittable(_ element: AccessibilityIds) -> Bool {
-        let screenTitle = self.staticTexts[element.elementValue]
-        return screenTitle.isHittable
+//MARK: - staticTexts
+extension XCUIApplication {
+    func textElementById(_ id: AccessibilityIds) -> XCUIElement {
+        self.staticTexts[id.elementValue]
     }
     
     func isWithTimeoutHittable(_ element: AccessibilityIds, timeout: TimeInterval = 0.1) -> Bool {
         let screenTitle = self.staticTexts[element.elementValue]
         return screenTitle.waitForExistence(timeout: timeout) && screenTitle.isHittable
-    }
-    
-    func label(of element: AccessibilityIds) -> String {
-       return self.staticTexts[element.elementValue].label
     }
 }
 
@@ -113,6 +135,7 @@ extension XCUIApplication {
     }
 }
 
+//MARK: - clearAndEnterText
 extension XCUIElement {
     /**
      Removes any current text in the field before typing in the new value
