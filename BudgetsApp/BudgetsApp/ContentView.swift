@@ -6,21 +6,57 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: []) private var budgetCategoryResults: FetchedResults<BudgetCategory>
+    
+    @State private var isAddCategoryPresented: Bool = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                Text(total as NSNumber, formatter: NumberFormatter.currency)
+                    .fontWeight(.bold)
+                
+                BudgetListView(
+                    budgetCategoryResults: budgetCategoryResults,
+                    onDeleteBudgetCategory: deleteBudgetCategory
+                )
+            }
+            .sheet(isPresented: $isAddCategoryPresented) {
+                AddBudgetCategoryView()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add Category") { isAddCategoryPresented = true }
+                }
+            }
         }
-        .padding()
     }
 }
 
+//MARK: - ComputedProperties and Functions
+private extension ContentView {
+    var total: Double {
+        budgetCategoryResults.reduce(0) { partialResult, budgetCategory in
+            partialResult + budgetCategory.total
+        }
+    }
+    
+    func deleteBudgetCategory(_ category: BudgetCategory) {
+        viewContext.delete(category)
+        do { try viewContext.save() }
+        catch { print(error.localizedDescription) }
+    }
+}
+
+//MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.managedObjectContext, CoreDataManager.shared.viewContext)
     }
 }
