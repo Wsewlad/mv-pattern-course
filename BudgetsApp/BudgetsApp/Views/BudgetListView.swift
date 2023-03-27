@@ -20,8 +20,13 @@ struct BudgetListView: View {
                         HStack {
                             Text(budgetCategory.title ?? "")
                             Spacer()
-                            VStack {
+                            VStack(alignment: .trailing, spacing: 10) {
                                 Text(budgetCategory.total as NSNumber, formatter: NumberFormatter.currency)
+                                
+                                Text("\(budgetCategory.overSpent ? "Overspent" : "Remaining") \(Text(budgetCategory.remainingBudgetTotal as NSNumber, formatter: NumberFormatter.currency))")
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(budgetCategory.overSpent ? .red : .green)
                             }
                         }
                     }
@@ -40,9 +45,3 @@ struct BudgetListView: View {
         }
     }
 }
-
-//struct BudgetListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BudgetListView()
-//    }
-//}

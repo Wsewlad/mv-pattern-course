@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82A48AF729D20BEF00CA2B01 /* BudgetSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A48AF629D20BEE00CA2B01 /* BudgetSummaryView.swift */; };
 		82AD3BED29C4C9E0001A9972 /* BudgetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD3BEC29C4C9E0001A9972 /* BudgetListView.swift */; };
 		82AD3BEF29C509E8001A9972 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD3BEE29C509E8001A9972 /* Transaction+CoreDataClass.swift */; };
 		82AD3BF129C50A38001A9972 /* BudgetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD3BF029C50A38001A9972 /* BudgetDetailView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82A48AF629D20BEE00CA2B01 /* BudgetSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetSummaryView.swift; sourceTree = "<group>"; };
 		82AD3BEC29C4C9E0001A9972 /* BudgetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetListView.swift; sourceTree = "<group>"; };
 		82AD3BEE29C509E8001A9972 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82AD3BF029C50A38001A9972 /* BudgetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				82AD3BEC29C4C9E0001A9972 /* BudgetListView.swift */,
 				82AD3BF029C50A38001A9972 /* BudgetDetailView.swift */,
 				82AD3BF229C514BE001A9972 /* TransactionsListView.swift */,
+				82A48AF629D20BEE00CA2B01 /* BudgetSummaryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				82ADBA4429C45B8D00AA303F /* BudgetCategory+CoreDataClass.swift in Sources */,
 				82AD3BF329C514BE001A9972 /* TransactionsListView.swift in Sources */,
 				82AD3BEF29C509E8001A9972 /* Transaction+CoreDataClass.swift in Sources */,
+				82A48AF729D20BEF00CA2B01 /* BudgetSummaryView.swift in Sources */,
 				82ADBA4A29C45DC300AA303F /* AddBudgetCategoryView.swift in Sources */,
 				82AD3BF129C50A38001A9972 /* BudgetDetailView.swift in Sources */,
 				82ADBA4729C45C8000AA303F /* CoreDataManager.swift in Sources */,
