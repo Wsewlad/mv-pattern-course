@@ -45,4 +45,12 @@ public class BudgetCategory: NSManagedObject {
         request.predicate = NSPredicate(format: "category = %@", budgetCategory)
         return request
     }
+    
+    static var all: NSFetchRequest<BudgetCategory> {
+        let request = BudgetCategory.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "dateCreated", ascending: false)
+        ]
+        return request
+    }
 }

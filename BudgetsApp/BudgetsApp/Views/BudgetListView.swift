@@ -11,6 +11,7 @@ struct BudgetListView: View {
     
     let budgetCategoryResults: FetchedResults<BudgetCategory>
     let onDeleteBudgetCategory: (BudgetCategory) -> Void
+    let onEditBudgetCategory: (BudgetCategory) -> Void
     
     var body: some View {
         List {
@@ -29,12 +30,19 @@ struct BudgetListView: View {
                                     .foregroundColor(budgetCategory.overSpent ? .red : .green)
                             }
                         }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                onDeleteBudgetCategory(budgetCategory)
+                            } label: {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                            
+                            Button("Edit") {
+                                onEditBudgetCategory(budgetCategory)
+                            }
+                            .tint(.green)
+                        }
                     }
-                }
-                .onDelete { indexSet in
-                    indexSet
-                        .map { budgetCategoryResults[$0] }
-                        .forEach { onDeleteBudgetCategory($0) }
                 }
             } else {
                 Text("No budget categorirs exist")

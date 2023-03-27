@@ -12,27 +12,36 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: []) private var budgetCategoryResults: FetchedResults<BudgetCategory>
+    @FetchRequest(fetchRequest: BudgetCategory.all) private var budgetCategoryResults
     
-    @State private var isAddCategoryPresented: Bool = false
+    @State private var sheetAction: SheetActions? = nil
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text(total as NSNumber, formatter: NumberFormatter.currency)
-                    .fontWeight(.bold)
+                HStack {
+                    Text("Total Budget - ")
+                    Text(total as NSNumber, formatter: NumberFormatter.currency)
+                        .fontWeight(.bold)
+                }
                 
                 BudgetListView(
                     budgetCategoryResults: budgetCategoryResults,
-                    onDeleteBudgetCategory: deleteBudgetCategory
+                    onDeleteBudgetCategory: deleteBudgetCategory,
+                    onEditBudgetCategory: editBudgetCategory
                 )
             }
-            .sheet(isPresented: $isAddCategoryPresented) {
-                AddBudgetCategoryView()
+            .sheet(item: $sheetAction) { action in
+                switch action {
+                case .add:
+                    AddBudgetCategoryView()
+                case let .edit(category):
+                    AddBudgetCategoryView(category: category)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add Category") { isAddCategoryPresented = true }
+                    Button("Add Category") { sheetAction = .add }
                 }
             }
         }
@@ -51,6 +60,27 @@ private extension ContentView {
         viewContext.delete(category)
         do { try viewContext.save() }
         catch { print(error.localizedDescription) }
+    }
+    
+    func editBudgetCategory(_ category: BudgetCategory) {
+        sheetAction = .edit(category)
+    }
+}
+
+//MARK: - Models
+private extension ContentView {
+    enum SheetActions: Identifiable {
+        var id: String { self.rawValue }
+        
+        var rawValue: String {
+            switch self {
+            case .add: return "add"
+            case .edit: return "edit"
+            }
+        }
+        
+        case add
+        case edit(BudgetCategory)
     }
 }
 

@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct AddBudgetCategoryView: View {
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
+    
+    private var category: BudgetCategory?
+    
+    init(category: BudgetCategory? = nil) {
+        self.category = category
+    }
     
     @State private var title: String = ""
     @State private var total: Double = 100
@@ -37,6 +42,7 @@ struct AddBudgetCategoryView: View {
                         .foregroundColor(.red)
                 }
             }
+            .onAppear(perform: onAppear)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
@@ -46,7 +52,7 @@ struct AddBudgetCategoryView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         if isFormValid {
-                            save()
+                            saveOrUpdate()
                         }
                     }
                 }
@@ -57,11 +63,22 @@ struct AddBudgetCategoryView: View {
 
 //MARK: - Functions
 private extension AddBudgetCategoryView {
-    func save() {
-        let budgetCategory = BudgetCategory(context: viewContext)
-        budgetCategory.title = title
-        budgetCategory.total = total
-        
+    func onAppear() {
+        if let budgetCategory = category {
+            title = budgetCategory.title ?? ""
+            total = budgetCategory.total
+        }
+    }
+    
+    func saveOrUpdate() {
+        if let category {
+            category.title = title
+            category.total = total
+        } else {
+            let budgetCategory = BudgetCategory(context: viewContext)
+            budgetCategory.title = title
+            budgetCategory.total = total
+        }
         do {
             try viewContext.save()
             dismiss()

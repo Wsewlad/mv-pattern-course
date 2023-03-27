@@ -39,6 +39,7 @@ struct BudgetDetailView: View {
                     Spacer()
                     Button("Save") {
                         createTransaction()
+                        clearFields()
                     }
                     .disabled(!isFormValid)
                     Spacer()
@@ -81,6 +82,11 @@ private extension BudgetDetailView {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func clearFields() {
+        title = ""
+        total = ""
     }
 }
 
